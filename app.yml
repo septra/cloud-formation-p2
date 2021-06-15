@@ -2,7 +2,17 @@ Description: >
   Server instances, Security Group and Load Balancer definitions
 
 Resources:
-  UdacityS3ReadOnlyEC2:
+  # instace profile contains the IAM Role name(s) that we want to associate to our auto scaling EC2 Servers
+  # never give too much permissions to your EC2 instances! if they get hacked, the permissions get hacked also!
+  # in this example, I create a Role called S3ReadOnlyC2 and just give it a policy of S3 Read-Only Access
+
+  ProfileWithRolesForOurApp:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      Roles:
+        - S3ReadOnlyEC2
+
+  S3ReadOnlyEC2:
     Type: AWS::IAM::Role
     Properties:
       Description: Allow read from S3 Bucket
@@ -13,7 +23,7 @@ Resources:
               Service:
                 - ec2.amazonaws.com
             Action:
-              - "sts:AssumeRole"
+              - sts:AssumeRole
 
   LoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
