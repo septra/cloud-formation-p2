@@ -80,10 +80,10 @@ Resources:
           systemctl start apache2.service
           cd /var/www/html
           echo "Everything working!" > index.html
-      ImageId: ami-0ac73f33a1888c64a
+      ImageId: !Ref AMIID
       SecurityGroups:
         - Ref: EC2WebServerSecurityGroup
-      InstanceType: t3.small
+      InstanceType: t3.medium
       BlockDeviceMappings:
         - DeviceName: "/dev/sdk"
           Ebs:
