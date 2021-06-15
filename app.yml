@@ -160,3 +160,5 @@ Outputs:
             - ''
             - - 'http://'
               - !GetAtt WebAppLoadBalancer.DNSName
+        Export:
+          Name: !Sub ${EnvironmentName}-LOAD-BALANCER-URL
