@@ -134,7 +134,7 @@ Resources:
       Conditions:
         - Field: path-pattern
           Values: [/]
-      ListenerArn: !Ref "Listener"
+      ListenerArn: !Ref 'Listener'
       Priority: 1
 
   WebAppTargetGroup:
@@ -155,4 +155,8 @@ Resources:
 Outputs:
     LoadBalancerURL:
         Description: Public Load Balancer Domain Name
-        Value: !GetAtt WebAppLoadBalancer.DNSName
+        Value: 
+          !Join 
+            - ''
+            - - 'http://'
+              - !GetAtt WebAppLoadBalancer.DNSName
