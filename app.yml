@@ -16,16 +16,13 @@ Resources:
   # never give too much permissions to your EC2 instances! if they get hacked, the permissions get hacked also!
   # in this example, I create a Role called S3ReadOnlyC2 and just give it a policy of S3 Read-Only Access
 
-  ProfileWithRolesForOurApp:
-    Type: AWS::IAM::InstanceProfile
-    Properties: 
-      Roles:
-        - S3ReadOnlyEC2
-
   S3ReadOnlyEC2:
     Type: AWS::IAM::Role
     Properties:
       Description: Allow read from S3 Bucket
+      ManagedPolicyArns: 
+        - "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+        - "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
@@ -34,6 +31,13 @@ Resources:
                 - ec2.amazonaws.com
             Action:
               - sts:AssumeRole
+      Path: "/"
+
+  ProfileWithRolesForOurApp:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      Roles:
+        - !Ref S3ReadOnlyEC2
 
   LoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
