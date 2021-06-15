@@ -33,4 +33,6 @@ by running the following commands after the templates have been changed.
 1. `./update.sh networkdeployment network.yml network-parameters.json`
 2. `./update.sh serverdeployment server.yml server-parameters.json`
 
-
+Test
+----
+The application that has been created in these deployments can be temporarily accessed at [http://serve-webap-t7w2oc5f11oz-1568862367.us-west-2.elb.amazonaws.com/](http://serve-webap-t7w2oc5f11oz-1568862367.us-west-2.elb.amazonaws.com/)
