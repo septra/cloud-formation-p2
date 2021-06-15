@@ -1,6 +1,16 @@
 Description: >
   Server instances, Security Group and Load Balancer definitions
 
+Parameters:
+  EnvironmentName:
+    Description: An environment name that will be prefixed to resource names.
+    Type: String
+
+  AMIID:
+    Description: The ID of the Amazon Machine Image to be used.
+    Type: String
+    Default: ami-090717c950a5c34d3
+
 Resources:
   # instace profile contains the IAM Role name(s) that we want to associate to our auto scaling EC2 Servers
   # never give too much permissions to your EC2 instances! if they get hacked, the permissions get hacked also!
